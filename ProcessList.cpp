@@ -207,7 +207,6 @@ BOOL CProcessList::EnumProcessThreads(DWORD dwProcessId, DWORD* pThreadIdArray, 
 
 	do
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(1500));
 		if (te32.th32OwnerProcessID == dwProcessId)
 		{
 			if (count < dwArraySize)
@@ -216,10 +215,10 @@ BOOL CProcessList::EnumProcessThreads(DWORD dwProcessId, DWORD* pThreadIdArray, 
 				break;
 		}
 	} while (Thread32Next(hSnapshot, &te32));
-
 	CloseHandle(hSnapshot);
 
 	*pThreadCount = count;
+	Sleep(500);
 	return TRUE;
 }
 
